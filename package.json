@@ -1,0 +1,18 @@
+{
+  "name": "Orti_extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "popup.js",
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "request": "^2.88.2",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
