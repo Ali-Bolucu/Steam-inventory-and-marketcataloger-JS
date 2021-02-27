@@ -1,17 +1,36 @@
-  <!doctype html>
+<!DOCTYPE html>
 <html>
-    <meta charset="UTF-8">
-    <head>
-        <title>AAA</title>
-    </head>
+  <meta charset="UTF-8" />
+  <head>
+    <title>AAA</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
 
-    <body>
-        <p>
-            DENEME.
-        </p>
-        <p id="demo">
-            
-        </p>
-    </body>
-    <script src="new_page.js"></script>
+      th {
+        text-align: left;
+      }
+    </style>
+  </head>
+
+  <body>
+    <table id="inv_table" style="width: 100%">
+      <thead>
+        <tr>
+          <th>GAME NAME</th>
+          <th>CARD NAME</th>
+          <th>IN THE INVENTORY</th>
+          <th>CAN BE SELL</th>
+          <th>DATES/#_of_cards</th>
+        </tr>
+        <tr></tr>
+      </thead>
+    </table>
+    <p id="demo"></p>
+  </body>
+  <script src="new_page.js"></script>
 </html>
