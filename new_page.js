@@ -170,11 +170,11 @@ fetch(
                   u_game_card += 1;
                 }
               }
-
-              row += `<td rowspan="${u_game_card}"> ${inv_game_name} </td>`;
+              var url_game = inv_data[item]["market_fee_app"];
+              row += `<td id="click_game" rowspan="${u_game_card}"> <a href="https:\/\/steamcommunity.com\/my\/gamecards\/${url_game}\/">${inv_game_name}</a> </td>`;
             }
-
-            row += `<td rowspan="${row_len}"> ${inv_card_name} </td>`;
+            var url_card = inv_data[item]["market_hash_name"];
+            row += `<td id="click_card" rowspan="${row_len}"> <a href="https://steamcommunity.com/market/listings/753/${url_card}">  ${inv_card_name} </a></td>`;
             row += `<td rowspan="${row_len}"> ${inv_in_inv} </td>`;
             row += `<td rowspan="${row_len}"> ${inv_off_sale} </td>`;
 
