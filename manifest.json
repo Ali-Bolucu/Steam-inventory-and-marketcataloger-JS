@@ -1,15 +1,15 @@
 {
   "manifest_version": 3,
 
-  "name": "ortilency",
-  "description": "steam launch from orti",
-  "version": "1.0.0",
+  "name": "Steam inventory and market history cataloger",
+  "description": "It's shows summed up data in order to make analysis and make forward action easily ",
+  "version": "0.0.0",
   "author": "Ali Bölücü",
   "icons": { "128": "icon_128.png" },
   "action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html",
-    "default_title": "My custom google Extension"
+    "default_title": "Extension for steam"
   },
   "permissions": ["activeTab"],
 
