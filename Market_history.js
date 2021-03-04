@@ -1,67 +1,86 @@
-const domparser = new DOMParser();
+let curr_pos = 0;
 
-fetch(
-  "https://steamcommunity.com/market/myhistory/render/?query=&start=0&count=500"
-)
-  .then(function (u) {
-    return u.json();
-  })
-  .then(function (data) {
-    let txt = data["results_html"];
+function fect_market() {
+  fetch(
+    `https://steamcommunity.com/market/myhistory/render/?query=&start=${curr_pos}&count=500`
+  )
+    .then(function (u) {
+      return u.json();
+    })
+    .then(function (data) {
+      let txt = data["results_html"];
 
-    var parser = new DOMParser();
-    var htmlDoc = parser.parseFromString(txt, "text/html");
+      var parser = new DOMParser();
+      var htmlDoc = parser.parseFromString(txt, "text/html");
 
-    let market_history = htmlDoc.getElementsByClassName(
-      "market_listing_row market_recent_listing_row"
-    );
+      let market_history = htmlDoc.getElementsByClassName(
+        "market_listing_row market_recent_listing_row"
+      );
 
-    for (let i = 0; i < market_history.length; i++) {
-      let status = market_history[i]
-        .getElementsByClassName(
-          "market_listing_left_cell market_listing_gainorloss"
-        )[0]
-        ["innerText"].trim();
-      console.log(status);
+      for (let i = 0; i < market_history.length; i++) {
+        let status = market_history[i]
+          .getElementsByClassName(
+            "market_listing_left_cell market_listing_gainorloss"
+          )[0]
+          ["innerText"].trim();
+        console.log(status);
 
-      let image = market_history[i].getElementsByTagName("img")[0].attributes[1]
-        .nodeValue;
-      console.log(image);
+        let image = market_history[i].getElementsByTagName("img")[0]
+          .attributes[1].nodeValue;
+        console.log(image);
 
-      let price = market_history[i]
-        .getElementsByClassName("market_listing_price")[0]
-        .innerText.trim();
-      console.log(price);
+        let price = market_history[i]
+          .getElementsByClassName("market_listing_price")[0]
+          .innerText.trim();
+        console.log(price);
 
-      let card_name = market_history[i].getElementsByClassName(
-        "market_listing_item_name"
-      )[0].innerText;
-      console.log(card_name);
+        let card_name = market_history[i].getElementsByClassName(
+          "market_listing_item_name"
+        )[0].innerText;
+        console.log(card_name);
 
-      let game_name = market_history[i].getElementsByClassName(
-        "market_listing_game_name"
-      )[0].innerText;
-      console.log(game_name);
+        let game_name = market_history[i].getElementsByClassName(
+          "market_listing_game_name"
+        )[0].innerText;
+        console.log(game_name);
 
-      let date_acted = market_history[i]
-        .getElementsByClassName(
-          "market_listing_right_cell market_listing_listed_date can_combine"
-        )[0]
-        .innerText.trim();
-      console.log(date_acted);
+        let date_acted = market_history[i]
+          .getElementsByClassName(
+            "market_listing_right_cell market_listing_listed_date can_combine"
+          )[0]
+          .innerText.trim();
+        console.log(date_acted);
 
-      let date_listed = market_history[i]
-        .getElementsByClassName(
-          "market_listing_right_cell market_listing_listed_date can_combine"
-        )[1]
-        .innerText.trim();
-      console.log(date_listed);
+        let date_listed = market_history[i]
+          .getElementsByClassName(
+            "market_listing_right_cell market_listing_listed_date can_combine"
+          )[1]
+          .innerText.trim();
+        console.log(date_listed);
 
-      console.log("________________________________________________________");
-    }
+        console.log("________________________________________________________");
+        document.getElementById("demo").innerHTML +=
+          "<br>" +
+          status +
+          "__" +
+          price +
+          "__" +
+          card_name +
+          "__" +
+          game_name +
+          "</br>";
+      }
+      let total_pos = data["total_count"];
+      console.log(data["total_count"]);
 
-    document.getElementById("demo").innerHTML += market_history[0];
-  });
+      curr_pos += 500;
+
+      if (total_pos > curr_pos) {
+        fect_market();
+      }
+    });
+}
+fect_market();
 
 let market_h = new Object();
 market_h = {
@@ -91,7 +110,6 @@ market_h = {
     },
   ],
 };
-
 for (i in market_h) {
   document.getElementById("deneme").innerHTML = JSON.stringify(market_h);
 }
