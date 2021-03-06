@@ -116,45 +116,6 @@ fetch(
             "____________________________________________________________________"
           );
 
-          /*output += `<li> ${inv_game_name} -- ${inv_card_name} -- ${inv_in_inv} / ${inv_off_sale}________ ${dates} ` 
-
-
-             let table;
-            
-
-             table += `<td> ${inv_game_name}</td> `
-             table += `<td>${inv_card_name}</td> `
-             table += `<td>${inv_in_inv} / ${inv_off_sale}</td> `
-             table += `<td>${dates} </td> `
-            
-                
-        let output = "<ul>";
-       output += "</ul>";
-
-       document.getElementById("table").innerHTML += table;
-
-       table = "";
-
-       function myFunction() {
-            var table = document.getElementById("inv_table");
-            var row = table.insertRow(row_count);
-            row_count += 1;
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-            var cell5 = `<td rowspan="">`
-            
-
-            cell1.innerHTML = `${inv_game_name}`;
-            cell2.innerHTML = `${inv_card_name}`;
-            cell3.innerHTML = `${inv_in_inv}`;
-            cell4.innerHTML = `${inv_off_sale}`;
-            cell5.innerHTML = `${dates.toString()}`;
-          }
-          myFunction();
-          */
-
           var row_len = dates.length;
           if (row_len == 0) {
             row_len = 1;
