@@ -81,7 +81,7 @@ function fect_market() {
         //console.log(date_listed);
         /*
         console.log("________________________________________________________");
-        document.getElementById("demo").innerHTML +=
+        document.getElementById("deneme").innerHTML +=
           "<br>" +
           status +
           "__" +
@@ -179,12 +179,12 @@ function fect_market() {
       }
 
       curr_pos += 500;
-
+      /*
       if (total_pos > curr_pos) {
         market_h[0]["cards"][0]["card_name"] =
           curr_pos + parseInt(market_h[0]["cards"][0]["card_name"], 10);
         fect_market();
-      }
+      }    */
     });
 }
 
@@ -205,22 +205,31 @@ function card_status_all(status, price, position, container) {
 
 function card_bought_spend(price, position, container) {
   var price = parseInt(price.replace(",", ""));
+  var tem_total_spend = parseInt(
+    market_h[container]["cards"][position]["total_m_spend"] * 100
+  );
+
   market_h[container]["cards"][position]["total_m_spend"] =
-    price + parseInt(market_h[container]["cards"][position]["total_m_spend"]);
+    (price + tem_total_spend) / 100;
 
   market_h[container]["cards"][position]["total"] =
-    parseInt(market_h[container]["cards"][position]["total"]) - price;
+    (parseInt(market_h[container]["cards"][position]["total"] * 100) - price) /
+    100;
 
   market_h[container]["cards"][position]["oBought"] =
     parseInt(market_h[container]["cards"][position]["oBought"], 10) + 1;
 }
 function card_sold_earned(price, position, container) {
   var price = parseInt(price.replace(",", ""));
+  var tem_total_earn = parseInt(
+    market_h[container]["cards"][position]["total_m_earned"] * 100
+  );
   market_h[container]["cards"][position]["total_m_earned"] =
-    price + parseInt(market_h[container]["cards"][position]["total_m_earned"]);
+    (price + tem_total_earn) / 100;
 
   market_h[container]["cards"][position]["total"] =
-    price + parseInt(market_h[container]["cards"][position]["total"]);
+    (price + parseInt(market_h[container]["cards"][position]["total"] * 100)) /
+    100;
 
   market_h[container]["cards"][position]["oSelled"] =
     parseInt(market_h[container]["cards"][position]["oSelled"], 10) + 1;
@@ -234,30 +243,15 @@ function card_canceled_on_sale(position, container) {
     parseInt(market_h[container]["cards"][position]["oON"], 10) - 1;
 }
 
-function basma() {
-  document.getElementById("deneme").innerHTML +=
-    "<br>" + JSON.stringify(market_h) + "</br>";
-}
-
-/*
-
-price in değeri düzeltilecek
-
-+1 ler de inte dünüştürme yapılacak
-
-game add le card add arasında düzeltme olması lazım
-
-yeni oyun eklerken ilk kartı eklicek, yoksa hep test kartı oluşur
-
-*/
-
 fect_market();
 
-document.getElementById("deneme").innerHTML += market_h.length;
-
-setTimeout(basma, 2000);
+function kaydetme() {
+  localStorage.setItem("market_h", JSON.stringify(market_h));
+}
+setTimeout(kaydetme, 2000);
 
 function anan() {
   document.getElementById("deneme").innerHTML += market_h.length;
 }
+setTimeout(anan, 100);
 setTimeout(anan, 2000);
