@@ -3,14 +3,50 @@
   <meta charset="UTF-8" />
   <head>
     <title>Market History</title>
-    <style></style>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        color: rgb(4, 252, 252);
+      }
+      th {
+        text-align: middle;
+        background-color: #4caf50;
+        color: white;
+      }
+      tbody {
+        border: 2px solid black;
+      }
+
+      tbody:nth-child(even) {
+        background-color: #1b1b1b;
+      }
+      tbody:nth-child(odd) {
+        background-color: #17181bd3;
+      }
+
+      td:hover {
+        background-color: #a3521c;
+      }
+    </style>
   </head>
 
   <body>
+    <button id="collector">Reset and collect all data from beginning</button>
+    <button id="uptade">Update the history</button>
     <button id="gettowindow">Show the JSON</button>
 
     <p id="deneme"></p>
+
+    <table id="market_table" style="width: 100%">
+      <thead>
+        <tr></tr>
+      </thead>
+    </table>
   </body>
-  <script src="Market_history.js"></script>
-  <script src="Retrive_and_Process.js"></script>
+  <script src="Market_history_all.js"></script>
+
+  <script src="Market_history_print.js"></script>
 </html>
