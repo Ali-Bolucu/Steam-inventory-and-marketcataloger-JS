@@ -12,15 +12,15 @@ document.addEventListener(
             game_name: "0",
             cards: [
               {
-                card_name: "0",
-                oBought: "quantity purchased",
-                oSelled: "quantity sold",
-                total_m_spend: "total money spend",
-                total_m_earned: "total money earned",
-                total: "total",
-                oIN: "number of in inventory",
-                oON: "number of in sale",
-                buy_order: "buy_order",
+                card_name: "Card name",
+                oBought: "Quantity purchased",
+                oSelled: "Quantity sold",
+                total_m_spend: "Total money spend",
+                total_m_earned: "Total money earned",
+                total: "Total",
+                oIN: "Number of in inventory",
+                oON: "Number of in sale",
+                buy_order: "Buy_order",
               },
             ],
           },
@@ -52,7 +52,7 @@ document.addEventListener(
                     "market_listing_left_cell market_listing_gainorloss"
                   )[0]
                   ["innerText"].trim();
-                console.log(status);
+                //console.log(status);
 
                 let image = market_history[i].getElementsByTagName("img")[0]
                   .attributes[1].nodeValue;
@@ -61,17 +61,17 @@ document.addEventListener(
                 let price = market_history[i]
                   .getElementsByClassName("market_listing_price")[0]
                   .innerText.trim();
-                console.log(price);
+                //console.log(price);
 
                 let card_name = market_history[i].getElementsByClassName(
                   "market_listing_item_name"
                 )[0].innerText;
-                console.log(card_name);
+                //console.log(card_name);
 
                 let game_name = market_history[i].getElementsByClassName(
                   "market_listing_game_name"
                 )[0].innerText;
-                console.log(game_name);
+                //console.log(game_name);
 
                 let date_acted = market_history[i]
                   .getElementsByClassName(
@@ -126,7 +126,7 @@ document.addEventListener(
                       ) {
                         card_status_all(status, price, contain_card, container);
 
-                        console.log("_________________");
+                        //console.log("_________________");
                         break;
                       }
 
@@ -137,7 +137,7 @@ document.addEventListener(
                           "card_name"
                         ] != card_name
                       ) {
-                        console.log("_________________");
+                        //console.log("_________________");
                         market_h[container]["cards"][max_con] = {
                           card_name: card_name,
                           oBought: "0",
@@ -164,8 +164,8 @@ document.addEventListener(
                     market_h.length == container + 1 &&
                     market_h[container]["game_name"] != game_name
                   ) {
-                    console.log(market_h.length);
-                    console.log("_________________");
+                    //console.log(market_h.length);
+                    //console.log("_________________");
                     market_h[market_h.length] = {
                       game_name: game_name,
                       cards: [
@@ -259,12 +259,35 @@ document.addEventListener(
 
           market_h[container]["cards"][position]["oON"] =
             parseInt(market_h[container]["cards"][position]["oON"], 10) - 1;
+
+          if (
+            market_h[container]["cards"][position]["card_name"] ==
+            "Spiffo the Athlete"
+          ) {
+            console.log("kart satıldı");
+          }
         }
+
         function card_put_on_sale(position, container) {
+          if (
+            market_h[container]["cards"][position]["card_name"] ==
+            "Spiffo the Athlete"
+          ) {
+            console.log("satışa kart konuldu");
+          }
+
           market_h[container]["cards"][position]["oON"] =
             parseInt(market_h[container]["cards"][position]["oON"], 10) + 1;
         }
+
         function card_canceled_on_sale(position, container) {
+          if (
+            market_h[container]["cards"][position]["card_name"] ==
+            "Spiffo the Athlete"
+          ) {
+            console.log("satışa kart iptal edildi");
+          }
+
           market_h[container]["cards"][position]["oON"] =
             parseInt(market_h[container]["cards"][position]["oON"], 10) - 1;
         }

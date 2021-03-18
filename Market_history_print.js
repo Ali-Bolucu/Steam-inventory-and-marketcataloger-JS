@@ -10,6 +10,9 @@ document.addEventListener(
         let retrieveddata = JSON.parse(retrievedObject);
         var row = "";
 
+        document.getElementById("deneme").innerHTML +=
+          "Last count : " + retrieveddata[0]["game_name"];
+
         function basma() {
           console.log("retrievedObject: ", JSON.parse(retrievedObject));
 
@@ -32,14 +35,12 @@ document.addEventListener(
 
               row += "</tr>";
             }
-
-            console.log(retrieveddata[i]);
           }
 
           document.getElementById("market_table").innerHTML += row;
         }
 
-        setTimeout(basma, 2000);
+        basma();
       },
       false
     );
