@@ -61,6 +61,8 @@ document.addEventListener(
                 let price = market_history[i]
                   .getElementsByClassName("market_listing_price")[0]
                   .innerText.trim();
+
+                price = price.replace(",", ".");
                 //console.log(price);
 
                 let card_name = market_history[i].getElementsByClassName(
@@ -85,21 +87,6 @@ document.addEventListener(
                     "market_listing_right_cell market_listing_listed_date can_combine"
                   )[1]
                   .innerText.trim();
-                //console.log(date_listed);
-                /*
-                console.log("________________________________________________________");
-                document.getElementById("deneme").innerHTML +=
-                  "<br>" +
-                  status +
-                  "__" +
-                  price +
-                  "__" +
-                  card_name +
-                  "__" +
-                  game_name +
-                  "</br>";
-                  */
-                //console.log(market_h.length);
 
                 for (
                   let container = 0;
@@ -192,12 +179,8 @@ document.addEventListener(
               curr_pos += 500;
               document.getElementById("deneme").innerHTML +=
                 "WAIT! : " + curr_pos;
-              document.getElementById("deneme").innerHTML;
 
               if (market_h[0].game_name > curr_pos) {
-                // ____________________________değiştir
-                market_h[0]["cards"][0]["card_name"] =
-                  curr_pos + parseInt(market_h[0]["cards"][0]["card_name"], 10);
                 fect_market();
               } else {
                 document.getElementById("deneme").innerHTML +=
@@ -225,69 +208,55 @@ document.addEventListener(
         }
 
         function card_bought_spend(price, position, container) {
-          var price = parseInt(price.replace(",", ""));
-          var tem_total_spend = parseInt(
-            market_h[container]["cards"][position]["total_m_spend"] * 100
-          );
+          var price = parseInt(price.replace(".", ""));
+          var tem_total_spend = parseInt(market_h[container]["cards"][position]["total_m_spend"].replace(".",""));
+          var total = parseInt(market_h[container]["cards"][position]["total"].replace(".", ""));
 
-          market_h[container]["cards"][position]["total_m_spend"] =
-            (price + tem_total_spend) / 100;
+          var ff = price + tem_total_spend;
+          var gg = total - price;
 
-          market_h[container]["cards"][position]["total"] =
-            (parseInt(market_h[container]["cards"][position]["total"] * 100) -
-              price) /
-            100;
+          market_h[container]["cards"][position]["total_m_spend"] = ff.toString(10).slice(0, -2) + "." + ff.toString(10).slice(-2);
 
-          market_h[container]["cards"][position]["oBought"] =
-            parseInt(market_h[container]["cards"][position]["oBought"], 10) + 1;
+          market_h[container]["cards"][position]["total"] = gg.toString(10).slice(0, -2) + "." + gg.toString(10).slice(-2);
+
+          market_h[container]["cards"][position]["oBought"] = parseInt(market_h[container]["cards"][position]["oBought"], 10) + 1;
+
+          
         }
         function card_sold_earned(price, position, container) {
-          var price = parseInt(price.replace(",", ""));
-          var tem_total_earn = parseInt(
-            market_h[container]["cards"][position]["total_m_earned"] * 100
-          );
-          market_h[container]["cards"][position]["total_m_earned"] =
-            (price + tem_total_earn) / 100;
 
-          market_h[container]["cards"][position]["total"] =
-            (price +
-              parseInt(market_h[container]["cards"][position]["total"] * 100)) /
-            100;
+
+
+
+          var price = parseInt(price.replace(".", ""));
+          var tem_total_spend = parseInt(market_h[container]["cards"][position]["total_m_earned"].replace(".",""));
+          var total = parseInt(market_h[container]["cards"][position]["total"].replace(".", ""));
+
+          var ff = price + tem_total_spend;
+          var gg = total + price;
+
+          market_h[container]["cards"][position]["total_m_earned"] = ff.toString(10).slice(0, -2) + "." + ff.toString(10).slice(-2);
+
+          market_h[container]["cards"][position]["total"] = gg.toString(10).slice(0, -2) + "." + gg.toString(10).slice(-2);
+
+
+
+
+
 
           market_h[container]["cards"][position]["oSelled"] =
             parseInt(market_h[container]["cards"][position]["oSelled"], 10) + 1;
 
           market_h[container]["cards"][position]["oON"] =
             parseInt(market_h[container]["cards"][position]["oON"], 10) - 1;
-
-          if (
-            market_h[container]["cards"][position]["card_name"] ==
-            "Spiffo the Athlete"
-          ) {
-            console.log("kart satıldı");
-          }
         }
 
         function card_put_on_sale(position, container) {
-          if (
-            market_h[container]["cards"][position]["card_name"] ==
-            "Spiffo the Athlete"
-          ) {
-            console.log("satışa kart konuldu");
-          }
-
           market_h[container]["cards"][position]["oON"] =
             parseInt(market_h[container]["cards"][position]["oON"], 10) + 1;
         }
 
         function card_canceled_on_sale(position, container) {
-          if (
-            market_h[container]["cards"][position]["card_name"] ==
-            "Spiffo the Athlete"
-          ) {
-            console.log("satışa kart iptal edildi");
-          }
-
           market_h[container]["cards"][position]["oON"] =
             parseInt(market_h[container]["cards"][position]["oON"], 10) - 1;
         }
@@ -297,16 +266,6 @@ document.addEventListener(
         function kaydetme() {
           localStorage.setItem("market_h", JSON.stringify(market_h));
         }
-
-        /*
-        
-        function anan() {
-          document.getElementById("deneme").innerHTML += market_h.length;
-        }
-        setTimeout(anan, 100);
-        setTimeout(anan, 2000);
-        
-        */
       },
       false
     );

@@ -10,9 +10,6 @@ document.addEventListener(
         let retrieveddata = JSON.parse(retrievedObject);
         var row = "";
 
-        document.getElementById("deneme").innerHTML +=
-          "Last count : " + retrieveddata[0]["game_name"];
-
         function basma() {
           console.log("retrievedObject: ", JSON.parse(retrievedObject));
 
