@@ -208,23 +208,70 @@ document.addEventListener(
         }
 
         function card_bought_spend(price, position, container) {
+
           var price = parseInt(price.replace(".", ""));
           var tem_total_spend = parseInt(market_h[container]["cards"][position]["total_m_spend"].replace(".",""));
           var total = parseInt(market_h[container]["cards"][position]["total"].replace(".", ""));
 
+          var dec;
+          var flo;
+
+
+
           var ff = price + tem_total_spend;
           var gg = total - price;
 
-          market_h[container]["cards"][position]["total_m_spend"] = ff.toString(10).slice(0, -2) + "." + ff.toString(10).slice(-2);
 
-          market_h[container]["cards"][position]["total"] = gg.toString(10).slice(0, -2) + "." + gg.toString(10).slice(-2);
+          if(ff.toString(10).slice(0,-2) == ""){
+            dec = "0";
+          }
+          else if (ff.toString(10).slice(0,-2) != ""){   
+            dec = ff.toString(10).slice(0,-2);
+          }
+          
+         if(ff.toString(10).slice(-2, -1) == ""){  
+            flo = "0"+ ff.toString(10).slice(-1);
+          }
+          else if (ff.toString(10).slice(-2, -1) != ""){
+            flo = ff.toString(10).slice(-2);
+          }
+         
+         market_h[container]["cards"][position]["total_m_spend"] = dec + "." + flo;
+
+         var flag = 0;
+         if(gg.toString(10).slice(0,1) == "-"){
+           flag =1;
+           gg = gg.toString(10).slice(1);
+ 
+         }
+
+         if(gg.toString(10).slice(0,-2) == ""){
+          dec = "0";
+        }
+        else if (gg.toString(10).slice(0,-2) != ""){   
+          dec = gg.toString(10).slice(0,-2);
+        }
+        
+       if(gg.toString(10).slice(-2, -1) == ""){  
+          flo = "0"+ gg.toString(10).slice(-1);
+        }
+        else if (gg.toString(10).slice(-2, -1) != ""){
+          flo = gg.toString(10).slice(-2);
+        }
+
+        if(flag == 1){
+
+          market_h[container]["cards"][position]["total"] = "-" + dec + "." + flo;
+        }else{
+          market_h[container]["cards"][position]["total"] = dec + "." + flo;
+        }
 
           market_h[container]["cards"][position]["oBought"] = parseInt(market_h[container]["cards"][position]["oBought"], 10) + 1;
 
           
         }
-        function card_sold_earned(price, position, container) {
 
+        function card_sold_earned(price, position, container) {
 
 
 
@@ -232,16 +279,63 @@ document.addEventListener(
           var tem_total_spend = parseInt(market_h[container]["cards"][position]["total_m_earned"].replace(".",""));
           var total = parseInt(market_h[container]["cards"][position]["total"].replace(".", ""));
 
+          var dec;
+          var flo;
+
+
+
           var ff = price + tem_total_spend;
           var gg = total + price;
 
-          market_h[container]["cards"][position]["total_m_earned"] = ff.toString(10).slice(0, -2) + "." + ff.toString(10).slice(-2);
 
-          market_h[container]["cards"][position]["total"] = gg.toString(10).slice(0, -2) + "." + gg.toString(10).slice(-2);
+          if(ff.toString(10).slice(0,-2) == ""){
+            dec = "0";
+          }
+          else if (ff.toString(10).slice(0,-2) != ""){   
+            dec = ff.toString(10).slice(0,-2);
+          }
+          
+         if(ff.toString(10).slice(-2, -1) == ""){  
+            flo = "0"+ ff.toString(10).slice(-1);
+          }
+          else if (ff.toString(10).slice(-2, -1) != ""){
+            flo = ff.toString(10).slice(-2);
+          }
+         
+         market_h[container]["cards"][position]["total_m_earned"] = dec + "." + flo;
+
+
+         var flag = 0;
+        if(gg.toString(10).slice(0,1) == "-"){
+          flag =1;
+          gg = gg.toString(10).slice(1);
+
+        }
 
 
 
 
+         if(gg.toString(10).slice(0,-2) == ""){
+          dec = "0";
+        }
+        else if (gg.toString(10).slice(0,-2) != ""){   
+          dec = gg.toString(10).slice(0,-2);
+        }
+        
+       if(gg.toString(10).slice(-2, -1) == ""){  
+          flo = "0"+ gg.toString(10).slice(-1);
+        }
+        else if (gg.toString(10).slice(-2, -1) != ""){
+          flo = gg.toString(10).slice(-2);
+        }
+        if(flag == 1){
+
+          market_h[container]["cards"][position]["total"] = "-" + dec + "." + flo;
+        }else{
+          market_h[container]["cards"][position]["total"] = dec + "." + flo;
+        }
+
+          
 
 
           market_h[container]["cards"][position]["oSelled"] =
@@ -261,11 +355,18 @@ document.addEventListener(
             parseInt(market_h[container]["cards"][position]["oON"], 10) - 1;
         }
 
-        fect_market();
 
         function kaydetme() {
           localStorage.setItem("market_h", JSON.stringify(market_h));
+
+
+        
+
+        
         }
+
+
+        fect_market();
       },
       false
     );
