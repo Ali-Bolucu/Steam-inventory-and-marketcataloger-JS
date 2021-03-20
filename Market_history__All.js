@@ -157,12 +157,14 @@ document.addEventListener(
           if (status == "-") {
             card_sold_earned(price, position, container);
           }
+          /*
           if (status == "" && price != "") {
             card_put_on_sale(position, container);
           }
           if (status == "" && price == "") {
             card_canceled_on_sale(position, container);
           }
+          */
         }
 
         function card_bought_spend(price, position, container) {
@@ -267,9 +269,10 @@ document.addEventListener(
 
           market_h[container]["cards"][position]["oSelled"] = parseInt(market_h[container]["cards"][position]["oSelled"], 10) + 1;
 
-          market_h[container]["cards"][position]["oON"] = parseInt(market_h[container]["cards"][position]["oON"], 10) - 1;
+          // market_h[container]["cards"][position]["oON"] = parseInt(market_h[container]["cards"][position]["oON"], 10) - 1;
         }
 
+        /*
         function card_put_on_sale(position, container) {
           market_h[container]["cards"][position]["oON"] = parseInt(market_h[container]["cards"][position]["oON"], 10) + 1;
         }
@@ -277,7 +280,7 @@ document.addEventListener(
         function card_canceled_on_sale(position, container) {
           market_h[container]["cards"][position]["oON"] = parseInt(market_h[container]["cards"][position]["oON"], 10) - 1;
         }
-
+*/
         function kaydetme() {
           localStorage.setItem("market_h", JSON.stringify(market_h));
         }
