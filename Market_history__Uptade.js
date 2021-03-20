@@ -20,20 +20,24 @@ document.addEventListener(
 
           fark = total_pos - parseInt(market_h[0]["game_name"], 10);
 
+          /*
           console.log("--------total_pos----------------");
           console.log(total_pos);
           console.log(typeof total_pos);
           console.log("---------market_game-name---------------");
           console.log(parseInt(market_h[0]["game_name"], 10));
           console.log(typeof parseInt(market_h[0]["game_name"], 10));
+          */
 
           console.log("------------------------");
         }, false)
         .then(function (lololo) {
+          /*
           console.log("---------fark---------------");
           console.log(fark);
           console.log(typeof fark);
           console.log("------------------------");
+          */
 
           if (fark > 500) {
             fark_c = 500;
@@ -300,7 +304,8 @@ document.addEventListener(
           function kaydetme() {
             localStorage.setItem("market_h", JSON.stringify(market_h));
           }
-          setTimeout(fect_market, 1000);
+
+          setTimeout(fect_market, 500);
         }, false);
     });
   },
