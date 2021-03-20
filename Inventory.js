@@ -9,9 +9,7 @@ var inner_c = 0;
 var u_game_card = 0;
 var row = "";
 
-fetch(
-  "https://steamcommunity.com/profiles/76561198867785639/inventory/json/753/6"
-)
+fetch("https://steamcommunity.com/profiles/76561198867785639/inventory/json/753/6")
   .then(function (u) {
     return u.json();
   })
@@ -33,28 +31,17 @@ fetch(
           var count_dates = 0;
 
           for (dat in inv_data) {
-            if (
-              inv_data[dat]["market_hash_name"] ===
-              inv_data[item]["market_hash_name"]
-            ) {
+            if (inv_data[dat]["market_hash_name"] === inv_data[item]["market_hash_name"]) {
               classid = inv_data[dat]["classid"];
               instanceid = inv_data[dat]["instanceid"];
 
               if (typeof inv_data[dat]["cache_expiration"] != "undefined") {
                 for (inst in inv_inv) {
-                  if (
-                    inv_inv[inst]["classid"] == classid &&
-                    inv_inv[inst]["instanceid"] == instanceid
-                  ) {
+                  if (inv_inv[inst]["classid"] == classid && inv_inv[inst]["instanceid"] == instanceid) {
                     count_dates += 1;
                   }
                 }
-                dates.push(
-                  inv_data[dat]["cache_expiration"]
-                    .slice(0, -10)
-                    .concat(" : ")
-                    .concat(count_dates)
-                );
+                dates.push(inv_data[dat]["cache_expiration"].slice(0, -10).concat(" : ").concat(count_dates));
               }
 
               count_dates = 0;
@@ -73,9 +60,7 @@ fetch(
               if (inv_inv[i]["instanceid"] == "0") {
                 count_data += 1;
               } else {
-                let card_drop = inv_inv[i]["classid"]
-                  .concat("_")
-                  .concat(inv_inv[i]["instanceid"]);
+                let card_drop = inv_inv[i]["classid"].concat("_").concat(inv_inv[i]["instanceid"]);
                 if (inv_data[card_drop]["marketable"] == 1) {
                   count_data += 1;
                 }
@@ -112,9 +97,7 @@ fetch(
           console.log(inv_in_inv);
           console.log(inv_off_sale);
           console.log(dates);
-          console.log(
-            "____________________________________________________________________"
-          );
+          console.log("____________________________________________________________________");
 
           var row_len = dates.length;
           if (row_len == 0) {
